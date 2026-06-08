@@ -1,0 +1,30 @@
+﻿
+<h2>All Products</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Details</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td> <img src="@item.ImageURL" width="100" /> </td>
+            <td>
+                <a asp-action="Details"
+                   asp-route-id="@item.Id"
+                   class="btn btn-success">
+                    Details
+                </a>
+            </td>
+
+        </tr>
+    }
+</table>
