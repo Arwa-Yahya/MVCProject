@@ -1,4 +1,6 @@
-﻿<h2>Product Details</h2>
+﻿@model MVCProject.Models.Product
+
+<h2>Product Details</h2>
 
 <div class="card" style="width: 25rem;">
 
@@ -16,9 +18,11 @@
             <strong>Description:</strong> @Model.Description
         </p>
 
-        <a asp-action="All" class="btn btn-secondary">
-            Back To Products
+        
+        <a href="/Product/All" class="btn btn-secondary">
+            Back To List
         </a>
+       
 
     </div>
 </div>

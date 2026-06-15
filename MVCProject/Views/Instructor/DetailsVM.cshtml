@@ -1,0 +1,40 @@
+﻿@model InsInfoExtraInfoViewModel
+
+
+<h2>Instructor Details</h2>
+
+<div class="card" style="width: 25rem; ">
+
+    <img src="/Images/@Model.InsImageUrl" class="card-img-top" alt="@Model.InsName" />
+
+    <div class="card-body">
+
+        <h4>@Model.InsName</h4>
+
+        <p>
+            <strong>ID:</strong> @Model.InsId
+        </p>
+
+        <p>
+            <strong>Salary:</strong> @Model.InsSalary
+        </p>
+
+        <p>
+            <strong>Address:</strong> @Model.InsAddress
+        </p>
+
+        <p>
+            <strong>Course:</strong> @Model.CrsName
+        </p>
+
+        <p>
+            <strong>Department:</strong> @Model.DeptName
+        </p>
+
+        <a href="/Instructor/index" class="btn btn-secondary">
+            Back To List
+        </a>
+
+    </div>
+
+</div>

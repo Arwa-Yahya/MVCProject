@@ -20,6 +20,8 @@ namespace MVCProject.Controllers
         public IActionResult Details(int id)
         {
             Product product = productBL.GetById(id);
+            if (product == null)
+                return NotFound();
             return View(product);
         }
     }
