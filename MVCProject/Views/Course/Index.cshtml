@@ -1,0 +1,34 @@
+﻿@model List<Course>
+
+<a asp-action="New" asp-controller="Course" class="btn btn-success">New</a>
+
+<h2>All Courses</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Degree</th>
+            <th>MinDegree</th>
+            <th>Hours</th>
+            <th>DeptId</th>
+            <th>InsName</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Degree</td>
+                <td>@item.MinDegree</td>
+                <td>@item.Hours</td>
+                <td>@item.Dept_Id</td>
+                <td>@item.Instructors?.FirstOrDefault()?.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
