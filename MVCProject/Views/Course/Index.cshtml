@@ -1,6 +1,22 @@
 ﻿@model List<Course>
 
+
+
 <a asp-action="New" asp-controller="Course" class="btn btn-success">New</a>
+
+
+<form method="get" asp-action="Index" asp-controller="Course">
+    <input type="text" name="searchText"  />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-danger mt-2">
+        @ViewBag.Msg
+    </div>
+}
+
 
 <h2>All Courses</h2>
 
@@ -13,7 +29,9 @@
             <th>MinDegree</th>
             <th>Hours</th>
             <th>DeptId</th>
+            <th>DeptName</th>
             <th>InsName</th>
+            <th>Edit</th>
         </tr>
     </thead>
 
@@ -27,7 +45,9 @@
                 <td>@item.MinDegree</td>
                 <td>@item.Hours</td>
                 <td>@item.Dept_Id</td>
+                <td>@item.Department?.Name</td>
                 <td>@item.Instructors?.FirstOrDefault()?.Name</td>
+                <td><a asp-action="Edit" asp-controller="Course" asp-route-Id="@item.Id" class="btn btn-success">edit</a></td>
             </tr>
         }
     </tbody>

@@ -50,12 +50,12 @@ namespace MVCProject.Controllers
 
         public IActionResult SaveNew(Instructor insfromrequest)
         {
-            if(insfromrequest.Name != null)
+            if (insfromrequest.Name != null)
             {
                 context.Instructors.Add(insfromrequest);
                 context.SaveChanges();
 
-                return RedirectToAction(actionName: "Index", controllerName:"Instructor");
+                return RedirectToAction(actionName: "Index", controllerName: "Instructor");
             }
 
             return View("New", insfromrequest);

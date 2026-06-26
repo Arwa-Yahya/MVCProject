@@ -3,31 +3,38 @@
 
 <form method="post" asp-action="SaveNew" asp-controller="Course">
 
+    <div asp-validation-summary="All" class="text-danger"></div>
+
 
     <div>
         <label asp-for="CrsName"></label>
         <input asp-for="CrsName" class="form form-control" />
+        <span asp-validation-for="CrsName" class="text-danger" ></span>
     </div>
 
     <div>
         <label asp-for="CrsDegree"></label>
         <input asp-for="CrsDegree" class="form form-control" />
+        <span asp-validation-for="CrsDegree" class="text-danger" ></span>
     </div>
 
     <div>
         <label asp-for="CrsMinDegree"></label>
         <input asp-for="CrsMinDegree" class="form form-control" />
+        <span asp-validation-for="CrsMinDegree" class="text-danger" ></span>
     </div>
 
     <div>
         <label asp-for="CrsHours"></label>
         <input asp-for="CrsHours" class="form form-control" />
+        <span asp-validation-for="CrsHours" class="text-danger" ></span>
     </div>
 
     <div>
         <label asp-for="DepartmentId"></label>
 
         <select asp-for="DepartmentId" class="form form-control">
+
             <option value="">-- Select Department --</option>
 
             @foreach (var deptlist in Model.DeptList)
@@ -36,6 +43,7 @@
             }
 
         </select>
+        <span asp-validation-for="DepartmentId" class="text-danger" ></span>
     </div>
 
     <div>
@@ -49,7 +57,7 @@
                 <option value="@inslist.Id">@inslist.Name</option>
             }
         </select>
-
+        <span asp-validation-for="InstructorId" class="text-danger" ></span>
     </div>
 
     <div>
@@ -59,3 +67,7 @@
 </form>
 
 <a asp-action="Index" asp-controller="Course" class="btn btn-success">Back To List</a>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>

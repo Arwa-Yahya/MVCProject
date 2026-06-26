@@ -1,0 +1,92 @@
+﻿@model CrsInfoExtraInfoViewModel
+
+<form method="post" action="/Course/SaveEdit/@Model.CrsId">
+       <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" name="CrsId" value="@Model.CrsId" />
+
+    <div>
+        <label asp-for="CrsName"></label>
+        <input class="form form-control" asp-for="CrsName" />
+        <span asp-validation-for="CrsName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CrsDegree"></label>
+        <input class="form form-control" asp-for="CrsDegree" />
+         <span asp-validation-for="CrsDegree" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CrsMinDegree"></label>
+        <input class="form form-control" asp-for="CrsMinDegree" />
+         <span asp-validation-for="CrsMinDegree" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CrsHours"></label>
+        <input asp-for="CrsHours" class="form form-control" />
+         <span asp-validation-for="CrsHours" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="DepartmentId"></label>
+        <select asp-for="DepartmentId" class="form form-control" >
+
+    @foreach (var deptitem in Model.DeptList)
+    {
+
+        if (Model.DepartmentId == deptitem.Id)
+        {
+            <option value="@deptitem.Id" selected>@deptitem.Name</option>
+        }
+        else
+        {
+            <option value="@deptitem.Id">@deptitem.Name</option>
+        }
+    }
+
+        </select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+
+    </div>
+
+    <div>
+        <label asp-for="InstructorId"></label>
+        <select asp-for="InstructorId" class="form form-control" >
+
+    @foreach (var insitem in Model.InstructorList)
+    {
+
+        if (Model.InstructorId == insitem.Id)
+        {
+            <option value="@insitem.Id" selected>@insitem.Name</option>
+        }
+        else
+        {
+            <option value="@insitem.Id">@insitem.Name</option>
+        }
+    }
+     @* <option value="">-- Select Instructor --</option>
+
+            @foreach (var inslist in Model.InstructorList)
+            {
+                <option value="@inslist.Id">@inslist.Name</option>
+            } *@
+
+</select>
+ <span asp-validation-for="InstructorId" class="text-danger"></span>
+
+</div>
+
+
+
+<input type="submit" value="SaveEdit" class="btn btn-success" />
+
+</form>
+
+
+ 
+<a asp-action="Index" asp-controller="Course" class="btn btn-success">Back to List</a>
+
+
