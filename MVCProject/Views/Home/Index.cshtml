@@ -1,8 +1,285 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Hero Section -->
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- Left Side -->
+            <div class="col-lg-6">
+
+                <span class="hero-badge">
+                    Academic Management Platform
+                </span>
+
+                <h1 class="hero-title mt-4">
+                    Welcome to
+                    <span>EduPortal</span>
+                </h1>
+
+                <p class="hero-text">
+                    Manage courses, instructors, students and departments
+                    through one modern and organized platform.
+                </p>
+
+                <div class="mt-4">
+
+                    <a asp-controller="Student"
+                       asp-action="Index"
+                       class="btn btn-primary btn-lg rounded-pill px-5">
+
+                        Explore System
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side -->
+            <div class="col-lg-6 text-center">
+
+                <img src="~/images/hero.png"
+                     class="img-fluid hero-img"
+                     alt="EduPortal">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- Features -->
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Explore EduPortal
+        </h2>
+
+        <p class="text-muted">
+            Everything you need to manage your academy in one place.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card">
+
+                <i class="bi bi-people-fill text-success"></i>
+
+                <h4>Students</h4>
+
+                <p>
+                    View, add and manage student information.
+                </p>
+
+                <a asp-controller="Student"
+                   asp-action="Index"
+                   class="btn btn-outline-primary rounded-pill">
+
+                    View Students
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card">
+
+                <i class="bi bi-journal-bookmark-fill text-primary"></i>
+
+                <h4>Courses</h4>
+
+                <p>
+                    Organize and manage all available courses.
+                </p>
+
+                <a asp-controller="Course"
+                   asp-action="Index"
+                   class="btn btn-outline-primary rounded-pill">
+
+                    View Courses
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card">
+
+                <i class="bi bi-building text-warning"></i>
+
+                <h4>Departments</h4>
+
+                <p>
+                    Organize departments and learning tracks.
+                </p>
+
+                <a asp-controller="Department"
+                   asp-action="Index"
+                   class="btn btn-outline-primary rounded-pill">
+
+                    View Departments
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card">
+
+                <i class="bi bi-person-workspace text-danger"></i>
+
+                <h4>Instructors</h4>
+
+                <p>
+                    Manage instructors and teaching staff.
+                </p>
+
+                <a asp-controller="Instructor"
+                   asp-action="Index"
+                   class="btn btn-outline-primary rounded-pill">
+
+                    View Instructors
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- About Section -->
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Why EduPortal?
+        </h2>
+
+        <p class="text-muted">
+            A smarter way to manage your academic system.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4  align-items-stretch">
+       
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card why-card  text-center">
+
+                <i class="bi bi-speedometer2 text-primary"></i>
+
+                <h4>
+                    Easy Management
+                </h4>
+
+                <p>
+                    Manage students, courses and instructors easily from one place.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card why-card  text-center">
+
+                <i class="bi bi-diagram-3-fill text-success"></i>
+
+                <h4>
+                    Better Organization
+                </h4>
+
+                <p>
+                    Keep academic data organized with departments and courses.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card why-card  text-center">
+
+                <i class="bi bi-laptop-fill text-danger"></i>
+
+                <h4>
+                    Modern Platform
+                </h4>
+
+                <p>
+                    Responsive and simple interface for better experience.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="feature-card why-card  text-center">
+
+                <i class="bi bi-bar-chart-fill text-warning"></i>
+
+                <h4>
+                    Track Progress
+                </h4>
+
+                <p>
+                    Follow academic information and records efficiently.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>

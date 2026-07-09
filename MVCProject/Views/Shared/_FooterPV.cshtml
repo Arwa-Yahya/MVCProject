@@ -1,0 +1,156 @@
+﻿<footer class="container-fluid footer mt-5 pt-5">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+            <!-- Logo -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h4 class="text-white mb-4">
+
+                    <i class="fas fa-graduation-cap me-2"></i>
+
+                    EduPortal
+
+                </h4>
+
+                <p>
+                    A modern academic management system designed to simplify
+                    student, course, department, and instructor management.
+                </p>
+
+            </div>
+
+            <!-- Quick Links -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="text-white mb-4">
+
+                    Quick Links
+
+                </h5>
+
+                <a asp-controller="Home" asp-action="Index" class="btn btn-link">
+                    Home
+                </a>
+
+                <a asp-controller="Home" asp-action="About" class="btn btn-link">
+                    About
+                </a>
+
+                <a asp-controller="Home" asp-action="Contact" class="btn btn-link">
+                    Contact
+                </a>
+
+            </div>
+
+            <!-- Management -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="text-white mb-4">
+
+                    Academic
+
+                </h5>
+
+                <a asp-controller="Student" asp-action="Index"class="btn btn-link text-start">
+                    Students
+                </a>
+
+                <a asp-controller="Course" asp-action="Index" class="btn btn-link text-start">
+                   Courses
+                </a>
+
+                <a asp-controller="Department" asp-action="Index" class="btn btn-link text-start">
+                    Departments
+                </a>
+
+                <a asp-controller="Instructor" asp-action="Index" class="btn btn-link text-start">
+                    Instructors
+                </a>
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="text-white mb-4">
+                    Contact
+                </h5>
+
+                <p>
+                    <i class="fa fa-map-marker-alt me-2"></i>
+
+                    Cairo, Egypt
+                </p>
+
+                <p>
+                    <i class="fa fa-envelope me-2"></i>
+
+                    info@eduportal.com
+                </p>
+
+                <p>
+                    <i class="fa fa-phone me-2"></i>
+
+                    +20 100 000 0000
+                </p>
+
+                <div class="d-flex mt-3">
+
+                    <a href="#" class="btn btn-outline-light btn-social me-2">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" class="btn btn-outline-light btn-social me-2">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="#" class="btn btn-outline-light btn-social">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container mt-5">
+
+        <hr class="border-secondary">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap py-3">
+
+            <span>
+                © @DateTime.Now.Year EduPortal. All Rights Reserved.
+            </span>
+
+            <div>
+
+                <a asp-controller="Home" asp-action="Index" class="footer-menu">
+                    Home
+                </a>
+
+                <a asp-controller="Home"asp-action="About" class="footer-menu">
+                    About
+                </a>
+
+                <a asp-controller="Home" asp-action="Contact"class="footer-menu">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>

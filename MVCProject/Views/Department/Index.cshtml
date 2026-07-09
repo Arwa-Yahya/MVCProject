@@ -1,35 +1,112 @@
 ﻿@model List<Department>
 
-<a asp-action="New" asp-controller="Department" class="btn btn-success">New</a>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<h2>All Departments</h2>
+<div class="container py-5">
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Manager</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
+    <div class="card border-0 shadow-sm rounded-4 mb-4 title-card">
 
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Manager</td>
-                <td>
-                    <a asp-action="Edit"
-                       asp-controller="Department"
-                       asp-route-id="@item.Id"
-                       class="btn btn-success">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <div class="card-body py-2 px-4">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <h4 class="fw-bold mb-0">
+                        All Departments
+                    </h4>
+
+                    <p class="text-muted mb-0 mt-1">
+                        Manage all departments in one place.
+                    </p>
+
+                </div>
+
+                <a asp-action="New"  asp-controller="Department" class="btn btn-primary rounded-pill px-4">
+
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Add Department
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card shadow-sm border-0 rounded-4">
+
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead class="table-header">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Department</th>
+                        <th>Manager</th>
+                        <th class="text-center">Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.Id</td>
+
+                            <td>
+                                @item.Name
+                            </td>
+
+                            <td>
+                                @item.Manager
+                            </td>
+
+                            <td class="text-center">
+
+                                <!-- Details -->
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm action-btn me-1" title="Details">
+
+                                    <i class="bi bi-eye-fill"></i>
+
+                                </a>
+
+                                <!-- Edit -->
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm action-btn me-1" title="Edit">
+
+                                    <i class="bi bi-pencil-fill"></i>
+
+                                </a>
+
+                                <!-- Delete -->
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm action-btn" title="Delete">
+
+                                    <i class="bi bi-trash-fill"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
