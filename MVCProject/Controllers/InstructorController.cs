@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MVCProject.Interface;
 using MVCProject.Models;
 using MVCProject.ViewModels;
 
@@ -7,10 +8,18 @@ namespace MVCProject.Controllers
 {
     public class InstructorController : Controller
     {
-        StepsContext context = new StepsContext();
+        IInstructorRepository insRepo;
+        IDepartmentRepository deptRepo;
+
+        public InstructorController(IInstructorRepository insrepo, IDepartmentRepository deptrepo)
+        {
+            insRepo = insrepo;
+            deptRepo = deptrepo;
+        }
+
         public IActionResult Index()
         {
-            List<Instructor> InsList = context.Instructors.ToList();
+            List<Instructor> InsList = insRepo.GetAll();
 
             return View("Index", InsList);
         }
@@ -18,10 +27,7 @@ namespace MVCProject.Controllers
         public IActionResult DetailsVM(int id)
         {
             //Instructor instructor = context.Instructors.FirstOrDefault(x => x.Id == id);
-            var instructor = context.Instructors
-            .Include(i => i.Course)
-            .Include(i => i.Department)
-            .FirstOrDefault(i => i.Id == id);
+            Instructor instructor = insRepo.GetById(id);
 
             if (instructor == null)
             {
@@ -52,8 +58,8 @@ namespace MVCProject.Controllers
         {
             if (insfromrequest.Name != null)
             {
-                context.Instructors.Add(insfromrequest);
-                context.SaveChanges();
+                insRepo.Add(insfromrequest);
+                insRepo.Save();
 
                 return RedirectToAction(actionName: "Index", controllerName: "Instructor");
             }

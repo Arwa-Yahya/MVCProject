@@ -1,0 +1,35 @@
+﻿@model List<Department>
+
+<a asp-action="New" asp-controller="Department" class="btn btn-success">New</a>
+
+<h2>All Departments</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Manager</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Manager</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-controller="Department"
+                       asp-route-id="@item.Id"
+                       class="btn btn-success">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

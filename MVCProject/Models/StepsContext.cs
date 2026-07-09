@@ -9,10 +9,8 @@ namespace MVCProject.Models
         public DbSet<CrsResult> CrsResults { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=ARWA\\SQLEXPRESS;Initial Catalog=MVC;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
-        }
+        public StepsContext(DbContextOptions <StepsContext> options) : base(options)
+        {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

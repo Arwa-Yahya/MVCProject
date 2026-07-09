@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MVCProject.Interface;
 using MVCProject.Models;
+using MVCProject.Repositories;
 using MVCProject.ViewModels;
 using System.Collections;
 
@@ -8,10 +10,20 @@ namespace MVCProject.Controllers
 {
     public class CourseController : Controller
     {
-        StepsContext context = new StepsContext();
+        ICourseRepository crsRepo;
+        IInstructorRepository insRepo;
+        IDepartmentRepository deptRepo;
+
+        public CourseController(ICourseRepository crsrepo, IInstructorRepository insrepo, IDepartmentRepository deptrepo)
+        {
+            crsRepo = crsrepo;
+            insRepo = insrepo;
+            deptRepo = deptrepo;
+        }
+
         public IActionResult Index(string searchText)
         {
-            var courses = context.Courses.Include(i => i.Instructors).Include(d => d.Department).ToList();
+            var courses = crsRepo.GetAll();
 
             if (searchText != null)
             {
@@ -32,12 +44,13 @@ namespace MVCProject.Controllers
 
             return View(courses);
         }
+
         public IActionResult New()
         {
             CrsInfoExtraInfoViewModel model = new CrsInfoExtraInfoViewModel();
 
-            model.InstructorList= context.Instructors.ToList();
-            model.DeptList= context.Departments.ToList();
+            model.InstructorList= insRepo.GetAll();
+            model.DeptList= deptRepo.GetAll();
 
             return View(model);
         }
@@ -47,25 +60,30 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                Course course = new Course();
+                Course course = new Course()
+                {
+                    Name = crsfromreq.CrsName,
+                    Degree = crsfromreq.CrsDegree,
+                    MinDegree = crsfromreq.CrsMinDegree,
+                    Hours = crsfromreq.CrsHours,
+                    Dept_Id = crsfromreq.DepartmentId
+                };
 
-                course.Name = crsfromreq.CrsName;
-                course.Degree = crsfromreq.CrsDegree;
-                course.MinDegree = crsfromreq.CrsMinDegree;
-                course.Hours = crsfromreq.CrsHours;
-                course.Dept_Id = crsfromreq.DepartmentId;
-                course.Instructors = context.Instructors
-                .Where(x => x.Id == crsfromreq.InstructorId)
-               .ToList();
+                Instructor instructor = insRepo.GetById(crsfromreq.InstructorId);
 
-                context.Courses.Add(course);
-                context.SaveChanges();
+                if (instructor != null)
+                {
+                    course.Instructors.Add(instructor);
+                }
+
+                crsRepo.Add(course);
+                crsRepo.Save();
 
                 return RedirectToAction("Index", "Course");
             }
 
-            crsfromreq.DeptList= context.Departments.ToList();
-            crsfromreq.InstructorList= context.Instructors.ToList();
+            crsfromreq.DeptList= deptRepo.GetAll() ;
+            crsfromreq.InstructorList= insRepo.GetAll() ;
 
             return View("New", crsfromreq);
         }
@@ -87,13 +105,13 @@ namespace MVCProject.Controllers
 
         public IActionResult Edit(int id)
         {
-            Course course = context.Courses.Include(c => c.Instructors).FirstOrDefault(e => e.Id == id);
+            Course course = crsRepo.GetById(id);
 
             if (course == null)
                 return NotFound();
 
-            List<Department> deptlist = context.Departments.ToList();
-            List<Instructor> inslist = context.Instructors.ToList();
+            List<Department> deptlist = deptRepo.GetAll();
+            List<Instructor> inslist = insRepo.GetAll();
 
             CrsInfoExtraInfoViewModel model = new CrsInfoExtraInfoViewModel()
             {
@@ -117,26 +135,37 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                Course crsfromdb = context.Courses.FirstOrDefault(e => e.Id == crsfromreq.CrsId);
+                if (crsRepo.GetById(crsfromreq.CrsId) == null)
+                {
+                    return NotFound();
+                }
 
-                if (crsfromdb == null) return NotFound();
+                Course course = new Course()
+                {
+                    Id = crsfromreq.CrsId,
+                    Name = crsfromreq.CrsName,
+                    Degree = crsfromreq.CrsDegree,
+                    MinDegree = crsfromreq.CrsMinDegree,
+                    Hours = crsfromreq.CrsHours,
+                    Dept_Id = crsfromreq.DepartmentId
+                };
 
-                crsfromdb.Name = crsfromreq.CrsName;
-                crsfromdb.Degree = crsfromreq.CrsDegree;
-                crsfromdb.MinDegree = crsfromreq.CrsMinDegree;
-                crsfromdb.Hours = crsfromreq.CrsHours;
-                crsfromdb.Dept_Id = crsfromreq.DepartmentId;
-                var instructor = context.Instructors.FirstOrDefault(i => i.Id == crsfromreq.InstructorId);
+                var instructor = insRepo.GetById(crsfromreq.InstructorId);
 
-                if (instructor != null) instructor.Crs_Id = crsfromdb.Id;
+                if (instructor != null)
+                {
+                    course.Instructors.Add(instructor);
+                }
 
-                context.SaveChanges();
+                crsRepo.Update(course);
+                crsRepo.Save();
+
                 return RedirectToAction("Index", "Course");
 
             }
             crsfromreq.CrsId = id;
-            crsfromreq.DeptList= context.Departments.ToList();
-            crsfromreq.InstructorList= context.Instructors.ToList();
+            crsfromreq.DeptList= deptRepo.GetAll();
+            crsfromreq.InstructorList= insRepo.GetAll();
 
             return View("Edit", crsfromreq);
         }

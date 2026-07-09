@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using MVCProject.Interface;
+using MVCProject.Models;
+using MVCProject.Repositories;
+
 namespace MVCProject
 {
     public class Program
@@ -8,6 +13,15 @@ namespace MVCProject
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            builder.Services.AddDbContext<StepsContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("CS"));
+            });
 
             var app = builder.Build();
 

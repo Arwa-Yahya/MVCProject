@@ -1,0 +1,31 @@
+﻿@model Department
+
+<form method="post" asp-action="SaveEdit" asp-route-id="@Model.Id">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Manager"></label>
+        <input asp-for="Manager" class="form-control" />
+        <span asp-validation-for="Manager" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <input type="submit" value="Save Edit" class="btn btn-success" />
+
+</form>
+
+<br />
+
+<a asp-action="Index" asp-controller="Department" class="btn btn-primary">
+    Back To List
+</a>
