@@ -23,8 +23,13 @@ namespace MVCProject
                 options.UseSqlServer(builder.Configuration.GetConnectionString("CS"));
             });
 
-            var app = builder.Build();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(45);
+            });
 
+            var app = builder.Build();
+           
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -32,9 +37,12 @@ namespace MVCProject
             }
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.MapStaticAssets();
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
